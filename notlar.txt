@@ -206,9 +206,113 @@ sonra fonksiyona artist yıgınında neler varsa onu gidip return içine ekliyor
             </Card>
 
 
-ikinci kez git e atmak için;
+ekranların düzenlemesine geçelim.
+şimdiki yazılanlara göre bir hearder var bir de altta ekranların ismi yazıyor. bunu kaldırmak için; 
 
-git add *
-git commit -m "detail screen"
-git push origin master 
+https://reactnavigation.org/docs/screen-options-resolution
+
+urlini kullandık.
+artiststackscreen e gittik.
+
+
+  <ArtistStack.Navigator>
+           <ArtistStack.Screen name = "Artist" component= {ArtistsScreen} options= {{headerShown : false}}></ArtistStack.Screen>
+           <ArtistStack.Screen name = "ArtistDetail" component= {ArtistDetailScreen} options={{headerShown: false}} ></ArtistStack.Screen>
+       </ArtistStack.Navigator>
+
+
+
+       headerShown özelliği ile altta yazan ekstra baslığı kapatmıs olduk.
+       ancak detayda headerShown kapatınca geri butonu da gitti. onu cozmek lazım.
+
+
+  ikon kullanacaksan react native vektor icon kullanıyoruz genelde.
+
+  ikon kullanımı ile ilgili https://reactnavigation.org/docs/tab-based-navigation urlinde Customizing the appearance baslığı kullandık.
+
+  import Ionicons from 'react-native-vector-icons/Ionicons'; 
+
+  importunu app.js içerisine ekledik.
+
+     <Tab.Screen name="Home" component={HomeScreen} options={{
+
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="star" color={color} size={26}></MaterialCommunityIcons>
+          ),
+        }}></Tab.Screen>
+
+        gibi bir ekleme yaptık ancak bu calısmayacak bu durumda node_modules klasörün içine gidersin.
+
+        react native vector icon bende yok. 
+
+        ikon yükleme için:
+
+        xcode açılır.
+        open a project or file 
+        masaüstü
+        projects
+        MetalMusicNews
+        ios
+        MetalMusicNews...workspace açılır.
+        xcode açılır
+        MetalMusicNews genişletirilir.
+        MetalMusicNews klasörüne sağ tıklanır.
+        new group
+        fonts isimli klsör oluşturulur.
+        masaüstünden > project > MetalMusicNews >  node_modules klasörü içine tıklanır
+        react native vector icon klasörü içine girilir (bende yok)
+        fonts klasörü içine girilir.
+        MaterialCommunityIcons.ttf yi xcode da fonts klasörü içine atarız.
+        xcodeda info.plist iiçne
+
+        https://github.com/oblador/react-native-vector-icons
+
+        adresinde table of contents baslığı altından installation > ios tıklanır.
+
+        List of all available fonts to copy & paste in Info.plist genişletilir.
+
+<key>UIAppFonts</key>
+<array>
+  <string>AntDesign.ttf</string>
+  <string>Entypo.ttf</string>
+  <string>EvilIcons.ttf</string>
+  <string>Feather.ttf</string>
+  <string>FontAwesome.ttf</string>
+  <string>FontAwesome5_Brands.ttf</string>
+  <string>FontAwesome5_Regular.ttf</string>
+  <string>FontAwesome5_Solid.ttf</string>
+  <string>Foundation.ttf</string>
+  <string>Ionicons.ttf</string>
+  <string>MaterialIcons.ttf</string>
+  <string>MaterialCommunityIcons.ttf</string>
+  <string>SimpleLineIcons.ttf</string>
+  <string>Octicons.ttf</string>
+  <string>Zocial.ttf</string>
+  <string>Fontisto.ttf</string>
+</array>
+
+sadece kullanılacak kısım bırakılır.
+
+<key>UIAppFonts</key>
+<array>
+
+  <string>MaterialCommunityIcons.ttf</string>
+ 
+</array>
+
+
+xcodedayken calıstırmak için yukardaki tablardan Product > clean build folder > product > build dersin proje build olur.
+
+build tamamlandıktan sonra vs code terminalde 
+
+yagmurtezcan@Yagmur-MacBook-Pro MetalMusicNews % react-native run-ios calıstırırsın.
+
+xcodeda gidip play tusundan calsıtırırsın.
+ve iconu gorursun.
+
+xcodeda cihaz değiştirme : product > destination > ordan seçip play tusu ile calıstırırsın.
+
+
+
+
 

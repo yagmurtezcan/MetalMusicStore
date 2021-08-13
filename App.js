@@ -4,6 +4,7 @@ import React from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import HomeScreen from './screens/HomeScreen'; // bunu eklemek için de HomeScreen yazarsın gelene tıklarsın v e 7. satır otomatik gelir.
 import ArtistsScreen from './screens/ArtistsScreen';
@@ -21,7 +22,12 @@ function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator>
-        <Tab.Screen name="Home" component={HomeScreen}></Tab.Screen>
+        <Tab.Screen name="Home" component={HomeScreen} options={{
+
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="star" color={color} size={26}></MaterialCommunityIcons>
+          ),
+        }}></Tab.Screen>
         <Tab.Screen name="News" component={NewsScreen}></Tab.Screen>
         <Tab.Screen name="Categories" component={Categories}></Tab.Screen>
         <Tab.Screen name="Artists" component={ArtistStackScreen}></Tab.Screen>

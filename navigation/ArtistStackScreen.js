@@ -10,8 +10,8 @@ const ArtistStack = createNativeStackNavigator();
 const ArtistStackScreen = () => {
     return (
        <ArtistStack.Navigator>
-           <ArtistStack.Screen name = "Artist" component= {ArtistsScreen}></ArtistStack.Screen>
-           <ArtistStack.Screen name = "ArtistDetail" component= {ArtistDetailScreen}></ArtistStack.Screen>
+           <ArtistStack.Screen name = "Artist" component= {ArtistsScreen} options= {{headerShown : false}}></ArtistStack.Screen>
+           <ArtistStack.Screen name = "ArtistDetail" component= {ArtistDetailScreen} options={{headerShown: false}} ></ArtistStack.Screen>
        </ArtistStack.Navigator>
     )
 }

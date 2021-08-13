@@ -86,6 +86,7 @@
 		13B07FAE1A68108700A75B9A /* MetalMusicNews */ = {
 			isa = PBXGroup;
 			children = (
+				5E50E9DB26C719E800C53050 /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -106,6 +107,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5E50E9DB26C719E800C53050 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		5F4C9E2AF8CC3830DE23E367 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,7 +122,6 @@
 				1D9E7B900FD561F064C91003 /* Pods-MetalMusicNews-MetalMusicNewsTests.debug.xcconfig */,
 				528846AFAE9D7BECCBA0D4B7 /* Pods-MetalMusicNews-MetalMusicNewsTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
