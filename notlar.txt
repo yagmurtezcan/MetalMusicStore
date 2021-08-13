@@ -1,0 +1,214 @@
+oncelikle masaüstünde projenin klasörünü açtık ve vs code içine attık.
+ https://reactnative.dev/docs/environment-setup doc içersiinden React native CLI QuickStart tabına geçtik. ve cihaz özelliklerini seçerek kuruluma basladık.
+terminali açtık Creating a new application baslığı altında yer alan npx react-native init AwesomeProject kutuphanesini terminalden yükledik.
+
+biz 'npx react-native init MetalMusicNews' (proje oluşturma kodu) yazdık altına metal MetalMusicNews klasörün oluşturulurdu.
+cd MetalMusicNews ile klasörün içine girdik.
+npx react-native start ile projeyi ayağa kaldırdık.
+https://reactnative.dev/docs/environment-setup sitesinde önerilen Step 2: Start your application baslığı altındaki npx react-native run-ios 
+
+iosta ios klasörün içinde podfile diye bi sey var. flipper kısmını yorum satırına alıyosun.
+
+cd ile MetalMusicNews içine girersin.
+cd ios ile ios klasörün içine giriyorsun. termianalde.
+flipper yorum satırına alınır.
+terminale pod install denir.
+cd MetalMusicNews
+npx react-native run-ios 
+
+bundan sonra build alınması lazım.
+
+
+
+bunları yükledikten sonra navigation kullanacağım içn https://reactnavigation.org/docs/getting-started getting start ekranından 
+1) npm install @react-navigation/native paketini yükleriz. terminalden sonra
+2) npm install react-native-screens react-native-safe-area-context yükleriz.
+3) https://reactnavigation.org/docs/hello-react-navigation ekranından alınan npm install @react-navigation/native-stack paketini de yükleriz.
+
+hata alırsan 31.07.2021 deki video 1.55 den itibaren izleyebilirsin. 2 kez run ios metodunu cağırdık stack ekledik ikinci denemede geldi.
+
+alta tab menü koyacağım için https://reactnavigation.org/docs/tab-based-navigation linkindeki 
+4) npm install @react-navigation/bottom-tabs yükleriz terminalden.
+
+
+deneme olarak https://reactnavigation.org/docs/hello-react-navigation linkindeki ilk örneği kopyalayıp app.js içerisine yapıştırdık. 
+
+// In App.js in a new project
+
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './screens/HomeScreen'; // bunu eklemek için de HomeScreen yazarsın gelene tıklarsın v e 7. satır otomatik gelir.
+
+function HomeScreen() {   // burayı sildik.
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
+
+const Stack = createNativeStackNavigator();
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+export default App;
+
+
+buranın son importundan sonra kendi ekranımız olan HomeScreen i import olarak ekledik 
+
+4. adımda yüklediğimiz npm install @react-navigation/bottom-tabs paketi için normalde 
+app.js içerisindeki importu kendimiz eklememiz gerekiyordu
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+bunu ekledikten sonra o importu const Stack = createNativeStackNavigator(); kodu ile tetiklersin. 
+zaten createNativeStackNavigator(); demek sana altta bi tab oluşturdum sen onu kullan demek.
+sonra app.js içerisinnde container icine gidip Tab.Screen lerini oluşturursun. yani aşağıdaki yapıyı (bunu kendine göre özelleştirirsin.)
+
+ <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+      </Stack.Navigator>
+
+
+      function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={HomeScreen}></Tab.Screen>
+        <Tab.Screen name="Contact" component={ContactScreen}></Tab.Screen>
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
+
+olarak yazdık.
+
+sonra screens klasörü içine bütün ekranlarımı ekledim ve sonra gidip app.js içerisine NavigationContainer içine ekledik.
+
+
+github a atma:
+
+https://github.com/yagmurtezcan?tab=repositories 
+2) repositories > new > repository name : MetalMusicNews > create repositories
+3) vs code terminale  gel > git init > git add > git commit -m "project init"
+4) gitte tarif edilen yerden remote olan satırı al > git remote origin http://github.com/yakintech/MetalMusicNews.git
+5) git push origin master
+
+
+https://reactnativeelements.com/docs/ adresinden aldığımız 
+npm install react-native-elements  
+paketini de yükleyelim. cd ile MetalMusicNews içerisine girerek.
+
+
+statik datalarımı data klasörü içerisine eklerim.
+
+data klasöründen sonra assetlerimin saklanacağı asset klasörü oluştururuurm.
+
+internetten alacağın imglerde resmi yeni sekmede ac dersen direkt kullanabilirsin.
+
+artistsData içersinde 3 tane data belirledim. bunu simdi screens klasörü içerisinde artists.js içersinde listelemesini isteyeceğim.
+
+bunun için https://reactnativeelements.com/docs/listitem url ini kullanıyoruz.
+
+import { ListItem, Avatar } from 'react-native-elements'  ile react native element ekliyorum. screens> artists.js içerisine.
+aynı zamanda artistleri data olarak yapmıstım onu da yukarı ekliyorum
+import { ListItem, Avatar } from 'react-native-elements'
+import {artists} from '../data/artistsData' olarak.
+
+<View>
+  {
+    list.map((l, i) => (
+      <ListItem key={i} bottomDivider>
+        <Avatar source={{uri: l.avatar_url}} />
+        <ListItem.Content>
+          <ListItem.Title>{l.name}</ListItem.Title>
+          <ListItem.Subtitle>{l.subtitle}</ListItem.Subtitle>
+        </ListItem.Content>
+      </ListItem>
+    ))
+  }
+</View>
+
+Avatar kullanarak listeleme kodlarını aldık. kendi isimlendirmelerimize göre kodu yeniden yazdık. (list kodunu.)
+
+Artistler listelendikten sonra detayları için screens klasörüne ArtistDetailScreen.js dosyasını oluşturduk.
+
+tıklayınca iiçne gitmesini istiyoruz. onu da button onpressine navigation.navigate ile yapabiliyorduk
+
+artistlere tıklanınca detaya gideceği için önce artistsscreen.js içerisine yazdığımız fonksiyona navigation ekleyelim.
+list item in onpressine navigation.navigate kodunu ekleriz.
+
+onPress={() => navigation.navigate('ArtistDetail',{id:l.id})}>
+yani tıklayınca id yi diğer tarafa yollayacak
+
+ancak tıklanan ekrana gitmesi için senin app.js içindeki stack e gitmesini istediğin ekranı tanımlanman lazım.
+
+bunun için https://reactnavigation.org/docs/tab-based-navigation adresinde 
+A native stack navigator for each tab baslığı altındaki örnekten yararlandık.
+
+tabın içinde baska baska ekranlar da temelde sen artists tabındasın ama o tabdan baska baska ekranlara gideceksin. bu tabın içine bi stack dahil et diyor.
+
+sen bitane settingsStackScreen yap diyor dokuman bunun içine bu yığını dahil et diyor.
+
+app.js içerisinden artist tabını iptal ettim yorum satırına aldım.
+gidip naviagation klasörü açtım.
+altına artiststackscreen.js oluşturduk. onun içine stack importunu ekleriz.
+
+import { createNativeStackNavigator } from '@react-navigation/native-stack'; bunu ekle
+
+
+const HomeStack = createNativeStackNavigator(); bnuunla calıstır.
+
+sonra fonksiyona artist yıgınında neler varsa onu gidip return içine ekliyoruz.
+
+1. si aşağıdaki kodu ekledik. yani bu kod artist tabının içinde 1. si artistlerin kendisi olacak demek. tab içinde neler olacaksa navigator içine ekleyeceğiz.
+
+      <ArtistStack.Navigator>
+           <ArtistStack.Screen name = "Artist"></ArtistStack.Screen>
+       </ArtistStack.Navigator>
+
+
+          <ArtistStack.Navigator>
+           <ArtistStack.Screen name = "Artist" component= {ArtistsScreen}></ArtistStack.Screen>
+           <ArtistStack.Screen name = "ArtistDetail" component= {ArtistDetailScreen}></ArtistStack.Screen>
+       </ArtistStack.Navigator>
+
+
+       ikincisi detail olacak diyoruz.
+
+       sonra gidip app.js içerisinden artık bu tabım benim ArtistStackScreen diyosun.
+
+       app.js içine artiststackscreen import edersin sonrasında da tabnavigator içine artiststackscreen dersin artist tabının yeni içeriği bu diye.
+
+       şimdi de ArtistDetailScreen i düzenleyelim.
+       orda da navigation ve route eklemem gerekiyor. routedan idsini çekeceğim cunku.
+       id cekince artık benim için neyin detayı oldugunu yakalasın ve o ozellikleri bassın.
+
+       ArtistDetailScreen için https://reactnativeelements.com/docs/card urlinden faydalandık.
+
+       import { Card, ListItem, Button, Icon } from 'react-native-elements' özelliğini import ettik.
+
+          <Card>
+                <Card.Title>{artistModel.name}</Card.Title>
+                <Card.Divider />
+                <Card.Image source={{ uri: artistModel.img }}>
+                </Card.Image>
+                <Text style={{marginTop:20}}>{artistModel.desription}</Text>
+            </Card>
+
+
+ikinci kez git e atmak için;
+
+git add *
+git commit -m "detail screen"
+git push origin master 
+
